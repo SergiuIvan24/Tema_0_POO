@@ -40,9 +40,10 @@ public class GameSession {
         Collections.shuffle(playerOneDeck, random);
         Random random2 = new Random(startGame.getShuffleSeed());
         Collections.shuffle(playerTwoDeck, random2);
-
-        this.playerOne = new Player(startGame.getPlayerOneDeckIdx(), startGame.getPlayerOneHero(), playerOneDeck, 0);
-        this.playerTwo = new Player(startGame.getPlayerTwoDeckIdx(), startGame.getPlayerTwoHero(), playerTwoDeck, 0);
+        Card playerOneHero = new Card(startGame.getPlayerOneHero());
+        Card playerTwoHero = new Card(startGame.getPlayerTwoHero());
+        this.playerOne = new Player(startGame.getPlayerOneDeckIdx(), playerOneHero, playerOneDeck, 0);
+        this.playerTwo = new Player(startGame.getPlayerTwoDeckIdx(), playerTwoHero, playerTwoDeck, 0);
         this.playerOne.getHero().setHealth(30);
         this.playerTwo.getHero().setHealth(30);
         this.startingPlayer = startGame.getStartingPlayer();
@@ -74,6 +75,8 @@ public class GameSession {
                 currentPlayer = playerOne;
             }
             this.getGameBoard().resetAttack();
+            this.getGameBoard().resetHeroAttack(playerOne);
+            this.getGameBoard().resetHeroAttack(playerTwo);
             startRound();
         } else {
             if (this.getCurrentPlayerIndex() == 1) {
@@ -83,6 +86,8 @@ public class GameSession {
             }
             this.turnCompleted++;
             this.getGameBoard().resetAttack();
+            this.getGameBoard().resetHeroAttack(playerOne);
+            this.getGameBoard().resetHeroAttack(playerTwo);
         }
 
     }

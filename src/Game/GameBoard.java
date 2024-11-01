@@ -135,6 +135,10 @@ public class GameBoard {
         }
     }
 
+    public void resetHeroAttack(Player player) {
+        player.getHero().setHasAttacked(false);
+    }
+
     public void cardUsesAbility(Card attacker, Card cardAttacked) {
         if(attacker.getName().equals("The Ripper")){
             int newAttackDamage = Math.max(cardAttacked.getAttackDamage() - 2, 0);
@@ -253,4 +257,51 @@ public class GameBoard {
         }
         return false;
     }
+
+    public void useHeroAbility(Player attacker, int attackedRow) {
+
+        attacker.setMana(attacker.getMana() - attacker.getHero().getMana());
+
+        if(attacker.getHero().getName().equals("Lord Royce")){
+            for(Card card : board.get(attackedRow)){
+                card.setFrozen(true);
+            }
+            return;
+        }
+
+        if(attacker.getHero().getName().equals("Empress Thorina")){
+            int maxi = -1;
+            Card maxCard = null;
+            for(Card card : board.get(attackedRow)){
+                if(card.getHealth() > maxi){
+                    maxi = card.getHealth();
+                    maxCard = card;
+                }
+            }
+            if(maxCard != null) {
+                maxCard.setHealth(0);
+            }
+            removeCard(maxCard);
+            return;
+        }
+        if(attacker.getHero().getName().equals("King Mudface")){
+            for(Card card : board.get(attackedRow)){
+                card.setHealth(card.getHealth() + 1);
+            }
+            return;
+        }
+        if(attacker.getHero().getName().equals("General Kocioraw")){
+            for(Card card : board.get(attackedRow)){
+                card.setAttackDamage(card.getAttackDamage() + 1);
+            }
+            return;
+        }
+    }
+    public ArrayList<Card> getRow(int row) {
+        if (row >= 0 && row < 4) {
+            return board.get(row);
+        }
+        return new ArrayList<>();
+    }
+
 }

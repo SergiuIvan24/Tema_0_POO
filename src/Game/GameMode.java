@@ -59,7 +59,7 @@ public class GameMode {
             case "getPlayerHero":
                 actionResult = output.addObject();
                 actionResult.put("command", action.getCommand());
-                CardInput hero = action.getPlayerIdx() == 1 ? currentSession.getPlayerOne().getHero() : currentSession.getPlayerTwo().getHero();
+                Card hero = action.getPlayerIdx() == 1 ? currentSession.getPlayerOne().getHero() : currentSession.getPlayerTwo().getHero();
                 actionResult.put("playerIdx", action.getPlayerIdx());
                 actionResult.set("output", convertHeroToJson(hero));
                 break;
@@ -380,8 +380,75 @@ public class GameMode {
                     return;
                 }
 
+                break;
+
+            case "useHeroAbility":
+                int affectedRow = action.getAffectedRow();
+                if(this.currentSession.getCurrentPlayer().getMana() < this.currentSession.getCurrentPlayer().getHero().getMana()){
+                    actionResult = output.addObject();
+                    actionResult.put("command", "useHeroAbility");
+                    actionResult.put("affected row", affectedRow);
+                    actionResult.put("error", "Not enough mana to use hero's ability.");
+                    return;
+                }
+                if(this.currentSession.getCurrentPlayer().getHero().isHasAttacked()){
+                    actionResult = output.addObject();
+                    actionResult.put("command", "useHeroAbility");
+                    actionResult.put("affected row", affectedRow);
+                    actionResult.put("error", "Hero has already attacked this turn.");
+                    return;
+                }
+                if((this.currentSession.getCurrentPlayer().getHero().getName().equals("Lord Royce")
+                        || this.currentSession.getCurrentPlayer().getHero().getName().equals("Empress Thorina")) && this.currentSession.getCurrentPlayerIndex() == 1){
+                    if(affectedRow != 0 && affectedRow != 1){
+                        actionResult = output.addObject();
+                        actionResult.put("command", "useHeroAbility");
+                        actionResult.put("affected row", affectedRow);
+                        actionResult.put("error", "Selected row does not belong to the enemy.");
+                        return;
+                    }
+                }
+                if((this.currentSession.getCurrentPlayer().getHero().getName().equals("Lord Royce")
+                        || this.currentSession.getCurrentPlayer().getHero().getName().equals("Empress Thorina")) && this.currentSession.getCurrentPlayerIndex() == 2){
+                    if(affectedRow != 2 && affectedRow != 3){
+                        actionResult = output.addObject();
+                        actionResult.put("command", "useHeroAbility");
+                        actionResult.put("affected row", affectedRow);
+                        actionResult.put("error", "Selected row does not belong to the enemy.");
+                        return;
+                    }
+                }
+
+                if((this.currentSession.getCurrentPlayer().getHero().getName().equals("General Kocioraw")
+                || this.currentSession.getCurrentPlayer().getHero().getName().equals("King Mudface")) && this.currentSession.getCurrentPlayerIndex() == 1){
+                    if(affectedRow != 2 && affectedRow != 3){
+                        actionResult = output.addObject();
+                        actionResult.put("command", "useHeroAbility");
+                        actionResult.put("affected row", affectedRow);
+                        actionResult.put("error", "Selected row does not belong to the current player.");
+                        return;
+                    }
+                }
+                if((this.currentSession.getCurrentPlayer().getHero().getName().equals("General Kocioraw")
+                        || this.currentSession.getCurrentPlayer().getHero().getName().equals("King Mudface")) && this.currentSession.getCurrentPlayerIndex() == 2){
+                    if(affectedRow != 0 && affectedRow != 1){
+                        actionResult = output.addObject();
+                        actionResult.put("command", "useHeroAbility");
+                        actionResult.put("affected row", affectedRow);
+                        actionResult.put("error", "Selected row does not belong to the current player.");
+                        return;
+                    }
+                }
+
+                this.currentSession.getGameBoard().useHeroAbility(this.currentSession.getCurrentPlayer(), affectedRow);
+                this.currentSession.getCurrentPlayer().getHero().setHasAttacked(true);
 
                 break;
+
+            case "getFrozenCardsOnTable":
+                this.printFrozenCards(output);
+                break;
+
             default:
 
                 break;
@@ -415,6 +482,24 @@ public class GameMode {
             actionResult.put("error", "Cannot place card on table since row is full.");
         }
     }
+
+    public void printFrozenCards(ArrayNode output) {
+        ArrayNode frozenCardsArray = objectMapper.createArrayNode();
+
+        for (int row = 0; row < 4; row++) {
+            ArrayList<Card> cardsInRow = currentSession.getGameBoard().getRow(row);
+            for (Card card : cardsInRow) {
+                if (card.getFrozen()) {
+                    frozenCardsArray.add(convertCardToJson2(card));
+                }
+            }
+        }
+
+        ObjectNode actionResult = output.addObject();
+        actionResult.put("command", "getFrozenCardsOnTable");
+        actionResult.set("output", frozenCardsArray);
+    }
+
 
     private ArrayNode convertDeckToJson(ArrayList<CardInput> deck) {
         ArrayNode deckArray = objectMapper.createArrayNode();
@@ -462,7 +547,7 @@ public class GameMode {
         return cardsArray;
     }
 
-    private ObjectNode convertHeroToJson(CardInput hero) {
+    private ObjectNode convertHeroToJson(Card hero) {
         ObjectNode heroNode = objectMapper.createObjectNode();
         heroNode.put("mana", hero.getMana());
         heroNode.put("description", hero.getDescription());

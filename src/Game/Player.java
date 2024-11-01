@@ -12,7 +12,7 @@ public class Player {
 
     private int playerDeckIdx;
 
-    private CardInput playerHero;
+    private Card playerHero;
 
     private ArrayList<CardInput> playerDeck;
 
@@ -20,7 +20,7 @@ public class Player {
 
     private boolean activeInTurn;
 
-    public Player(int playerIdx, CardInput playerHero, ArrayList<CardInput> playerDeck, int mana){
+    public Player(int playerIdx, Card playerHero, ArrayList<CardInput> playerDeck, int mana){
         this.playerDeckIdx = playerIdx;
         this.playerHero = playerHero;
         this.playerDeck = playerDeck;
@@ -35,7 +35,7 @@ public class Player {
     public ArrayList<CardInput> getDeck(){
         return this.playerDeck;
     }
-    public CardInput getHero(){
+    public Card getHero(){
         return this.playerHero;
     }
     public boolean getActiveInTurn(){

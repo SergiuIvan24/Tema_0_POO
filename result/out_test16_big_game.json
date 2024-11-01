@@ -2,10 +2,19 @@
   "command" : "getPlayerTurn",
   "output" : 1
 }, {
+  "command" : "getFrozenCardsOnTable",
+  "output" : [ ]
+}, {
+  "command" : "getFrozenCardsOnTable",
+  "output" : [ ]
+}, {
   "command" : "getPlayerMana",
   "playerIdx" : 2,
   "output" : 1
 }, {
+  "command" : "getFrozenCardsOnTable",
+  "output" : [ ]
+}, {
   "command" : "getPlayerMana",
   "playerIdx" : 1,
   "output" : 0
@@ -39,6 +48,10 @@
     "colors" : [ "Orange", "Red", "Black" ],
     "name" : "The Ripper"
   }
+}, {
+  "command" : "useHeroAbility",
+  "affected row" : 0,
+  "error" : "Not enough mana to use hero's ability."
 }, {
   "command" : "getCardAtPosition",
   "x" : 2,
@@ -87,26 +100,36 @@
 }, {
   "command" : "getPlayerTurn",
   "output" : 1
+}, {
+  "command" : "getFrozenCardsOnTable",
+  "output" : [ ]
 }, {
   "command" : "getPlayerMana",
   "playerIdx" : 1,
   "output" : 3
 }, {
+  "command" : "useHeroAbility",
+  "affected row" : 0,
+  "error" : "Selected row does not belong to the current player."
+}, {
   "command" : "getCardAtPosition",
   "x" : 0,
   "y" : 0,
   "output" : {
     "mana" : 2,
     "attackDamage" : 2,
-    "health" : 2,
+    "health" : 3,
     "description" : "Standard card: A drink can always be served, with the blood of his enemies.",
     "colors" : [ "Red", "Blue", "Pink" ],
     "name" : "Berserker"
   }
 }, {
+  "command" : "getFrozenCardsOnTable",
+  "output" : [ ]
+}, {
   "command" : "getPlayerMana",
   "playerIdx" : 2,
-  "output" : 7
+  "output" : 5
 }, {
   "command" : "useAttackHero",
   "cardAttacker" : {
@@ -121,7 +144,7 @@
   "output" : [ [ {
     "mana" : 2,
     "attackDamage" : 2,
-    "health" : 2,
+    "health" : 3,
     "description" : "Standard card: A drink can always be served, with the blood of his enemies.",
     "colors" : [ "Red", "Blue", "Pink" ],
     "name" : "Berserker"
