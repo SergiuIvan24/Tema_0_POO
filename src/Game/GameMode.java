@@ -387,14 +387,14 @@ public class GameMode {
                 if(this.currentSession.getCurrentPlayer().getMana() < this.currentSession.getCurrentPlayer().getHero().getMana()){
                     actionResult = output.addObject();
                     actionResult.put("command", "useHeroAbility");
-                    actionResult.put("affected row", affectedRow);
+                    actionResult.put("affectedRow", affectedRow);
                     actionResult.put("error", "Not enough mana to use hero's ability.");
                     return;
                 }
                 if(this.currentSession.getCurrentPlayer().getHero().isHasAttacked()){
                     actionResult = output.addObject();
                     actionResult.put("command", "useHeroAbility");
-                    actionResult.put("affected row", affectedRow);
+                    actionResult.put("affectedRow", affectedRow);
                     actionResult.put("error", "Hero has already attacked this turn.");
                     return;
                 }
@@ -403,7 +403,7 @@ public class GameMode {
                     if(affectedRow != 0 && affectedRow != 1){
                         actionResult = output.addObject();
                         actionResult.put("command", "useHeroAbility");
-                        actionResult.put("affected row", affectedRow);
+                        actionResult.put("affectedRow", affectedRow);
                         actionResult.put("error", "Selected row does not belong to the enemy.");
                         return;
                     }
@@ -413,7 +413,7 @@ public class GameMode {
                     if(affectedRow != 2 && affectedRow != 3){
                         actionResult = output.addObject();
                         actionResult.put("command", "useHeroAbility");
-                        actionResult.put("affected row", affectedRow);
+                        actionResult.put("affectedRow", affectedRow);
                         actionResult.put("error", "Selected row does not belong to the enemy.");
                         return;
                     }
@@ -424,7 +424,7 @@ public class GameMode {
                     if(affectedRow != 2 && affectedRow != 3){
                         actionResult = output.addObject();
                         actionResult.put("command", "useHeroAbility");
-                        actionResult.put("affected row", affectedRow);
+                        actionResult.put("affectedRow", affectedRow);
                         actionResult.put("error", "Selected row does not belong to the current player.");
                         return;
                     }
@@ -434,7 +434,7 @@ public class GameMode {
                     if(affectedRow != 0 && affectedRow != 1){
                         actionResult = output.addObject();
                         actionResult.put("command", "useHeroAbility");
-                        actionResult.put("affected row", affectedRow);
+                        actionResult.put("affectedRow", affectedRow);
                         actionResult.put("error", "Selected row does not belong to the current player.");
                         return;
                     }
@@ -499,6 +499,8 @@ public class GameMode {
         actionResult.put("command", "getFrozenCardsOnTable");
         actionResult.set("output", frozenCardsArray);
     }
+
+
 
 
     private ArrayNode convertDeckToJson(ArrayList<CardInput> deck) {

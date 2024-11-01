@@ -68,27 +68,46 @@ public class GameSession {
 
     public void endTurn() {
 
+        if (getCurrentPlayerIndex() == 1) {
+            currentPlayer = playerTwo;
+        } else {
+            currentPlayer = playerOne;
+        }
+
+        this.getGameBoard().resetAttack();
+        this.getGameBoard().resetHeroAttack(playerOne);
+        this.getGameBoard().resetHeroAttack(playerTwo);
+
         if (this.turnCompleted == 1) {
-            if (this.getCurrentPlayerIndex() == 1) {
-                currentPlayer = playerTwo;
-            } else {
-                currentPlayer = playerOne;
-            }
-            this.getGameBoard().resetAttack();
-            this.getGameBoard().resetHeroAttack(playerOne);
-            this.getGameBoard().resetHeroAttack(playerTwo);
             startRound();
         } else {
-            if (this.getCurrentPlayerIndex() == 1) {
-                currentPlayer = playerTwo;
-            } else {
-                currentPlayer = playerOne;
-            }
+            resetFrozenCards();
             this.turnCompleted++;
-            this.getGameBoard().resetAttack();
-            this.getGameBoard().resetHeroAttack(playerOne);
-            this.getGameBoard().resetHeroAttack(playerTwo);
         }
+    }
+
+    public void resetFrozenCards() {
+
+        if (this.getCurrentPlayerIndex() == 1) {
+            for (int row = 0; row <= 1; row++) {
+                ArrayList<Card> cardsInRow = this.getGameBoard().getRow(row);
+                for (Card card : cardsInRow) {
+                    if (card.getFrozen()) {
+                        card.setFrozen(false);
+                    }
+                }
+            }
+        } else {
+            for (int row = 2; row <= 3; row++) {
+                ArrayList<Card> cardsInRow = this.getGameBoard().getRow(row);
+                for (Card card : cardsInRow) {
+                    if (card.getFrozen()) {
+                        card.setFrozen(false);
+                    }
+                }
+            }
+        }
+
 
     }
 

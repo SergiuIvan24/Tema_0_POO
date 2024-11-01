@@ -52,7 +52,7 @@
   }
 }, {
   "command" : "useHeroAbility",
-  "affected row" : 2,
+  "affectedRow" : 2,
   "error" : "Selected row does not belong to the current player."
 }, {
   "command" : "getFrozenCardsOnTable",
@@ -178,24 +178,10 @@
   }
 }, {
   "command" : "getFrozenCardsOnTable",
-  "output" : [ {
-    "mana" : 1,
-    "attackDamage" : 6,
-    "health" : 3,
-    "description" : "Premium card: His presence is not known even by ghosts, success at all costs.",
-    "colors" : [ "Black", "White" ],
-    "name" : "Sentinel"
-  }, {
-    "mana" : 1,
-    "attackDamage" : 0,
-    "health" : 3,
-    "description" : "Standard card: Thrown from the highest cliff, revenge will be his glory.",
-    "colors" : [ "Pink", "Purple" ],
-    "name" : "The Cursed One"
-  } ]
+  "output" : [ ]
 }, {
   "command" : "useHeroAbility",
-  "affected row" : 2,
+  "affectedRow" : 2,
   "error" : "Selected row does not belong to the current player."
 }, {
   "command" : "getPlayerTurn",

@@ -167,6 +167,7 @@ public class GameBoard {
         }
     }
 
+
     private ObjectNode convertCardToJson(Card card) {
         ObjectNode cardNode = objectMapper.createObjectNode();
         cardNode.put("mana", card.getMana());

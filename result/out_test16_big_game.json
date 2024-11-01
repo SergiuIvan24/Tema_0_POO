@@ -50,7 +50,7 @@
   }
 }, {
   "command" : "useHeroAbility",
-  "affected row" : 0,
+  "affectedRow" : 0,
   "error" : "Not enough mana to use hero's ability."
 }, {
   "command" : "getCardAtPosition",
@@ -109,7 +109,7 @@
   "output" : 3
 }, {
   "command" : "useHeroAbility",
-  "affected row" : 0,
+  "affectedRow" : 0,
   "error" : "Selected row does not belong to the current player."
 }, {
   "command" : "getCardAtPosition",

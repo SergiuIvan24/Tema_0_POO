@@ -24,11 +24,11 @@
   }
 }, {
   "command" : "useHeroAbility",
-  "affected row" : 1,
+  "affectedRow" : 1,
   "error" : "Selected row does not belong to the current player."
 }, {
   "command" : "useHeroAbility",
-  "affected row" : 0,
+  "affectedRow" : 0,
   "error" : "Not enough mana to use hero's ability."
 }, {
   "command" : "getPlayerTurn",
@@ -59,11 +59,11 @@
   }
 }, {
   "command" : "useHeroAbility",
-  "affected row" : 2,
+  "affectedRow" : 2,
   "error" : "Selected row does not belong to the current player."
 }, {
   "command" : "useHeroAbility",
-  "affected row" : 1,
+  "affectedRow" : 1,
   "error" : "Hero has already attacked this turn."
 }, {
   "command" : "getPlayerMana",

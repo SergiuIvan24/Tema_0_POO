@@ -51,15 +51,15 @@
   }
 }, {
   "command" : "useHeroAbility",
-  "affected row" : 3,
+  "affectedRow" : 3,
   "error" : "Selected row does not belong to the enemy."
 }, {
   "command" : "useHeroAbility",
-  "affected row" : 0,
+  "affectedRow" : 0,
   "error" : "Not enough mana to use hero's ability."
 }, {
   "command" : "useHeroAbility",
-  "affected row" : 1,
+  "affectedRow" : 1,
   "error" : "Selected row does not belong to the enemy."
 }, {
   "command" : "getPlayerTurn",
@@ -114,17 +114,10 @@
     "description" : "Standard card: Death incarnate. No better time to die than now.",
     "colors" : [ "Black", "Yellow" ],
     "name" : "The Ripper"
-  }, {
-    "mana" : 1,
-    "attackDamage" : 3,
-    "health" : 1,
-    "description" : "Premium card: Fear him. Your last breath is now.",
-    "colors" : [ "Red", "Blue", "Pink" ],
-    "name" : "Berserker"
   } ]
 }, {
   "command" : "useHeroAbility",
-  "affected row" : 2,
+  "affectedRow" : 2,
   "error" : "Hero has already attacked this turn."
 }, {
   "command" : "getPlayerMana",
