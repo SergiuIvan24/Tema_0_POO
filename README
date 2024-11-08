@@ -1,0 +1,27 @@
+Am impartit intreg proiectul in urmatoarele clase: 
+	1. Card - reprezentand cartea de joc, cu campurile aferente: mană, sănătate, descriere, culori, atac, și diverse stări (de exemplu, este înghețată sau a atacat deja).
+		- permite folosirea cartilor de catre jucatori in anumite scenarii, incluzand atacul adversarului sau utilizarrea unor abilitati speciale.
+	2. GameBoard - clasa care gestioneaza tabla de joc, incluzand plasarea cartilor si atacurilor, precum si logica abilitatilor speciale si a eliminarii cartilor distruse.
+	3. GameMode - clasa care implementeaza logica generala de joc. Rolul principal al clasei este gestionarea comenzilor de input si a actiunilor, precum si a outputului. Tot aici ne ocupam si de inceputul unei noi sesiuni de joc, folosind un model Singleton pentru evitarea crearii unor intante de joc multiple pentru acelasi joc.
+	4. GameSession - gestioneaza o sesiune de joc, insemnand amestecarea cartilor, plasarea jucatorilor in joc, etc.
+			- se ocupa si de mecanisme precum incrementarea rundei, a turelor fiecarui jucator, actualizarea manei, etc. Tot aici se gestioneaza si sfarsitul jocului, in cazul victoriei unui jucator.
+	5. PLayer - implementarea campurile aferente fiecarui jucator: mâna de cărți, deck-ul de joc, mana disponibila, etc.
+		- tot aici sunt si metode pt resetarea statusului intr-un joc nou, amestecarea deckului.
+		
+Fluxul Jocului 
+
+Începutul Jocului: Clasa GameMode inițializează o sesiune de joc folosind startNewSession(), distribuind pachete de cărți și eroi fiecărui jucător, apoi selectează jucătorul care începe.
+
+Runde și Ture: La fiecare rundă, jucătorii primesc mana și trag o carte. Jucătorii pot apoi să plaseze cărți, să atace cu cărțile lor, sau să folosească abilități speciale. Cand se constata ca s-au depasit 2 ture in total per runda, se incrementeaza
+numarul de runde.
+
+Plasarea Cărților: GameBoard permite jucătorilor să plaseze cărți în rândul corect într-o manieră controlată, verificând dacă există suficiente resurse.
+
+Atacurile: Jucătorii pot folosi cărțile pentru a ataca alte cărți sau eroul advers. attackCard() și attackHero() sunt utilizate pentru a aplica daune inamicilor.
+
+Sfârșitul Turei: După ce un jucător își termină mișcările, endTurn() este apelat pentru a pregăti runda pentru jucătorul următor, resetând atacurile cărților și a eroilor.
+
+Sfârșitul Jocului: Jocul se încheie atunci când un erou este învins (viața scade la 0), iar GameMode setează starea jocului ca fiind terminata, înregistrând cine a câștigat.
+
+
+

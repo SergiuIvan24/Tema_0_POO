@@ -5,15 +5,9 @@ import checker.Checker;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import checker.CheckerConstants;
-import fileio.CardInput;
 import fileio.Input;
-import fileio.GameInput;
 import fileio.ActionsInput;
-import Game.Hero;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,8 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
-import java.util.ArrayList;
-import Game.GameMode;
+
+import game.GameMode;
 
 /**
  * The entry point to this homework. It runs the checker that tests your implentation.

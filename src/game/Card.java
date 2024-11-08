@@ -1,13 +1,10 @@
-package Game;
+package game;
 
 import fileio.CardInput;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Card {
+public final class Card {
 
     private int mana;
     private int health;
@@ -18,7 +15,7 @@ public class Card {
     private boolean isFrozen;
     private boolean hasAttacked;
 
-    public Card(){
+    public Card() {
         this.mana = 0;
         this.health = 0;
         this.description = null;
@@ -26,7 +23,7 @@ public class Card {
         this.name = null;
     }
 
-    public Card(CardInput card){
+    public Card(final CardInput card) {
         this.mana = card.getMana();
         this.health = card.getHealth();
         this.description = card.getDescription();
@@ -35,12 +32,11 @@ public class Card {
         this.attackDamage = card.getAttackDamage();
     }
 
-
     public int getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(final int health) {
         this.health = health;
     }
 
@@ -48,7 +44,7 @@ public class Card {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -56,7 +52,7 @@ public class Card {
         return colors;
     }
 
-    public void setColors(ArrayList<String> colors) {
+    public void setColors(final ArrayList<String> colors) {
         this.colors = colors;
     }
 
@@ -64,7 +60,7 @@ public class Card {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -72,32 +68,31 @@ public class Card {
         return mana;
     }
 
-    public void setMana(int mana) {
+    public void setMana(final int mana) {
         this.mana = mana;
     }
 
-    public void setFrozen(boolean val) {
+    public void setFrozen(final boolean val) {
         this.isFrozen = val;
     }
 
-    public boolean getFrozen(){
+    public boolean getFrozen() {
         return this.isFrozen;
     }
 
-    public boolean isHasAttacked(){
+    public boolean isHasAttacked() {
         return this.hasAttacked;
     }
 
-    public void setHasAttacked(boolean val) {
+    public void setHasAttacked(final boolean val) {
         this.hasAttacked = val;
     }
-
 
     public int getAttackDamage() {
         return this.attackDamage;
     }
 
-    public void setAttackDamage(int val){
+    public void setAttackDamage(final int val) {
         this.attackDamage = val;
     }
 }
