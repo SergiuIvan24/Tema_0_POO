@@ -12,11 +12,9 @@ public final class Player {
 
     private int mana;
 
-    private int playerDeckIdx;
+    private final Card playerHero;
 
-    private Card playerHero;
-
-    private ArrayList<CardInput> playerDeck;
+    private final ArrayList<CardInput> playerDeck;
 
     private ArrayList<CardInput> playerHand;
 
@@ -25,16 +23,16 @@ public final class Player {
     private int nrWins = 0;
 
     /**
-     * Constructs a Player object.
+     * Constructor pentru clasa Player.
+     * Inițializează un jucător cu eroul, pachetul de cărți și mana inițială.
      *
-     * @param playerIdx   the index of the player's deck
-     * @param playerHero  the player's hero card
-     * @param playerDeck  the player's deck of cards
-     * @param mana        the initial mana of the player
+     * @param playerIdx   indexul jucătorului
+     * @param playerHero  eroul jucătorului
+     * @param playerDeck  pachetul de cărți al jucătorului
+     * @param mana        mana inițială a jucătorului
      */
     public Player(final int playerIdx, final Card playerHero,
                   final ArrayList<CardInput> playerDeck, final int mana) {
-        this.playerDeckIdx = playerIdx;
         this.playerHero = playerHero;
         this.playerDeck = playerDeck;
         this.playerHand = new ArrayList<>();
@@ -42,7 +40,8 @@ public final class Player {
     }
 
     /**
-     * Resets the player's state for a new game.
+     * Resetează starea jucătorului pentru un joc nou.
+     * Reinitializează mana, golește mâna și resetează viața și starea eroului.
      */
     public void reset() {
         this.mana = 0;
@@ -52,9 +51,9 @@ public final class Player {
     }
 
     /**
-     * Shuffles the player's deck.
+     * Amestecă pachetul de cărți al jucătorului.
      *
-     * @param seed the seed for the random shuffle
+     * @param seed sămânța pentru generarea aleatorie
      */
     public void shuffleDeck(final int seed) {
         Random random = new Random(seed);
@@ -62,91 +61,101 @@ public final class Player {
     }
 
     /**
-     * Gets the player's deck.
+     * Returnează pachetul de cărți al jucătorului.
      *
-     * @return the player's deck of cards
+     * @return pachetul de cărți
      */
     public ArrayList<CardInput> getDeck() {
         return this.playerDeck;
     }
 
     /**
-     * Gets the player's hero card.
+     * Returnează cartea de tip erou a jucătorului.
      *
-     * @return the player's hero card
+     * @return cartea erou
      */
     public Card getHero() {
         return this.playerHero;
     }
 
     /**
-     * Gets whether the player is active in the current turn.
+     * Returnează dacă jucătorul este activ în tura curentă.
      *
-     * @return true if the player is active in the current turn, false otherwise
+     * @return true dacă jucătorul este activ, false altfel
      */
     public boolean getActiveInTurn() {
         return this.activeInTurn;
     }
 
     /**
-     * Sets whether the player is active in the current turn.
+     * Setează dacă jucătorul este activ în tura curentă.
      *
-     * @param stat the new active status
+     * @param stat starea de activitate
      */
     public void setActiveInTurn(final boolean stat) {
         this.activeInTurn = stat;
     }
 
     /**
-     * Sets the player's mana.
+     * Setează mana jucătorului.
      *
-     * @param mana the new mana value
+     * @param mana noua valoare a manei
      */
     public void setMana(final int mana) {
         this.mana = mana;
     }
 
     /**
-     * Gets the player's mana.
+     * Returnează mana curentă a jucătorului.
      *
-     * @return the player's mana
+     * @return valoarea manei
      */
     public int getMana() {
         return this.mana;
     }
 
     /**
-     * Sets the player's hand.
+     * Setează mâna jucătorului.
      *
-     * @param playerHand the new player hand
+     * @param playerHand noua mână a jucătorului
      */
     public void setPlayerHand(final ArrayList<CardInput> playerHand) {
         this.playerHand = playerHand;
     }
 
     /**
-     * Gets the player's hand.
+     * Returnează mâna jucătorului.
      *
-     * @return the player's hand
+     * @return mâna jucătorului
      */
     public ArrayList<CardInput> getPlayerHand() {
         return this.playerHand;
     }
 
     /**
-     * Gets a card from the player's hand.
+     * Returnează o carte din mâna jucătorului pe baza indexului.
      *
-     * @param idx the index of the card in the player's hand
-     * @return the card at the specified index
+     * @param idx indexul cărții
+     * @return cartea de la indexul specificat
      */
     public CardInput getCardHand(final int idx) {
         return this.playerHand.get(idx);
     }
 
+    /**
+     * Returnează numărul de victorii ale jucătorului.
+     *
+     * @return numărul de victorii
+     */
     public int getNrWins() {
         return this.nrWins;
     }
 
+    /**
+     * Setează numărul de victorii ale jucătorului.
+     *
+     * @param val noua valoare pentru numărul de victorii
+     */
     public void setNrWins(final int val) {
         this.nrWins = val;
     }

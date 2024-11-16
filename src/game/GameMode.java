@@ -22,8 +22,9 @@ public final class GameMode {
     private GameMode() { }
 
     /**
+     * Returnează instanța singleton a clasei `GameMode`.
      *
-     * @return
+     * @return instanța singleton a clasei
      */
     public static GameMode getInstance() {
         if (instance == null) {
@@ -33,30 +34,34 @@ public final class GameMode {
     }
 
     /**
+     * Returnează sesiunea curentă a jocului.
      *
-     * @return
+     * @return sesiunea curentă
      */
     public GameSession getCurrentSession() {
         return this.currentSession;
     }
 
     /**
+     * Returnează numărul total de jocuri jucate.
      *
-     * @return
+     * @return numărul de jocuri jucate
      */
     public int getNrGamesPlayed() {
         return this.nrGamesPlayed;
     }
 
     /**
-     *
+     * Resetează instanța singleton pentru a permite reutilizarea în teste.
      */
     public static void clearInstance() {
         instance = null;
     }
 
     /**
+     * Resetează jocul curent și șterge sesiunile salvate.
      *
+     * Setează numărul de jocuri jucate la 0 și șterge sesiunile din istoric.
      */
     public static void resetGame() {
         if (instance != null && instance.currentSession != null) {
@@ -69,10 +74,11 @@ public final class GameMode {
 
 
     /**
+     * Începe o sesiune nouă de joc cu pachetele de cărți specificate.
      *
-     * @param playerOneDeck
-     * @param playerTwoDeck
-     * @param startGame
+     * @param playerOneDeck pachetul de cărți al jucătorului 1
+     * @param playerTwoDeck pachetul de cărți al jucătorului 2
+     * @param startGame     parametrii pentru inițializarea jocului
      */
     public void startNewSession(final ArrayList<CardInput> playerOneDeck,
                                 final ArrayList<CardInput> playerTwoDeck,
@@ -97,8 +103,9 @@ public final class GameMode {
     }
 
     /**
+     * Resetează pachetele jucătorilor pentru un nou joc folosind aceleași pachete.
      *
-     * @param startGame
+     * @param startGame parametrii pentru inițializarea noului joc
      */
     public void startNewGameWithSameDecks(final StartGameInput startGame) {
         currentSession.resetDecks();
@@ -106,9 +113,10 @@ public final class GameMode {
     }
 
     /**
+     * Procesează o acțiune specificată și generează rezultatul corespunzător.
      *
-     * @param action
-     * @param output
+     * @param action acțiunea ce trebuie procesată
+     * @param output rezultatul acțiunii în format JSON
      */
     public void processAction(final ActionsInput action, final ArrayNode output) {
         switch (action.getCommand()) {
@@ -599,9 +607,10 @@ public final class GameMode {
     }
 
     /**
+     * Plasează o carte din mâna jucătorului curent pe tablă.
      *
-     * @param action
-     * @param actionResult
+     * @param action       informațiile acțiunii
+     * @param actionResult obiectul JSON pentru rezultate
      */
     private void placeCard(final ActionsInput action, final ObjectNode actionResult) {
         Player currentPlayer = currentSession.getCurrentPlayer();
@@ -633,8 +642,9 @@ public final class GameMode {
     }
 
     /**
+     * Returnează toate cărțile înghețate de pe tablă.
      *
-     * @param output
+     * @param output lista cărților înghețate în format JSON
      */
     public void printFrozenCards(final ArrayNode output) {
         ArrayNode frozenCardsArray = ObjectMapper.createArrayNode();
@@ -655,9 +665,10 @@ public final class GameMode {
 
 
     /**
+     * Converteste un pachet de cărți în format JSON.
      *
-     * @param deck
-     * @return
+     * @param deck pachetul de cărți
+     * @return lista JSON a cărților
      */
 
     private ArrayNode convertDeckToJson(final ArrayList<CardInput> deck) {
@@ -669,9 +680,10 @@ public final class GameMode {
     }
 
     /**
+     * Converteste o carte în format JSON.
      *
-     * @param card
-     * @return
+     * @param card cartea care trebuie convertită
+     * @return obiect JSON cu informațiile cărții
      */
     private ObjectNode convertCardToJson(final CardInput card) {
         ObjectNode cardNode = ObjectMapper.createObjectNode();
@@ -689,9 +701,10 @@ public final class GameMode {
     }
 
     /**
+     * Converteste o carte de tip `Card` în format JSON.
      *
-     * @param card
-     * @return
+     * @param card cartea care trebuie convertită
+     * @return obiect JSON cu informațiile cărții
      */
     private ObjectNode convertCardToJson2(final Card card) {
         ObjectNode cardNode = ObjectMapper.createObjectNode();

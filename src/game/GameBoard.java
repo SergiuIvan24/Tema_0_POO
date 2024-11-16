@@ -17,7 +17,7 @@ public final class GameBoard {
     private static final int NOT_ENOUGH_MANA_ERR_NR = -2;
     private static final int MAX_ROW_PL_ONE = 3;
 
-    private ArrayList<ArrayList<Card>> board;
+    private final ArrayList<ArrayList<Card>> board;
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     /**
@@ -40,11 +40,12 @@ public final class GameBoard {
     }
 
     /**
+     * Plasează o carte pe tabla de joc dacă jucătorul are suficientă mană.
      *
-     * @param card
-     * @param playerIndex
-     * @param currentPlayer
-     * @return
+     * @param card         cartea care trebuie plasată
+     * @param playerIndex  indicele jucătorului curent
+     * @param currentPlayer jucătorul care efectuează acțiunea
+     * @return -2 dacă mana este insuficientă, -1 dacă locul este invalid, 1 dacă plasarea reușește
      */
     public int placeCard(final CardInput card, final int playerIndex, final Player currentPlayer) {
         if (currentPlayer.getMana() < card.getMana()) {
@@ -63,10 +64,11 @@ public final class GameBoard {
     }
 
     /**
+     * Determină rândul și coloana unde poate fi plasată o carte pe tabla de joc.
      *
-     * @param playerIndex
-     * @param card
-     * @return
+     * @param playerIndex indicele jucătorului curent
+     * @param card        cartea care trebuie plasată
+     * @return coordonatele rândului și coloanei, sau coordonate invalide (-1, -1) dacă nu există spațiu
      */
     private Coordinates getPlayerRowColumn(final int playerIndex, final CardInput card) {
         Coordinates coords = new Coordinates();
@@ -113,10 +115,11 @@ public final class GameBoard {
     }
 
     /**
+     * Returnează cartea de pe o anumită poziție de pe tablă.
      *
-     * @param row
-     * @param col
-     * @return
+     * @param row rândul căutat
+     * @param col coloana căutată
+     * @return cartea de pe poziția specificată sau null dacă nu există
      */
     public Card getCard(final int row, final int col) {
         if (row >= 0 && row < board.size() && col >= 0 && col < board.get(row).size()) {
@@ -126,9 +129,11 @@ public final class GameBoard {
     }
 
     /**
+     * Realizează un atac asupra unei cărți, scăzând viața acesteia.
+     * Elimină cartea de pe tablă dacă viața ajunge la 0 sau mai puțin.
      *
-     * @param attacker
-     * @param cardAttacked
+     * @param attacker     cartea care atacă
+     * @param cardAttacked cartea atacată
      */
     public void attackCard(final Card attacker, final Card cardAttacked) {
         int newHealth = cardAttacked.getHealth() - attacker.getAttackDamage();
@@ -140,8 +145,9 @@ public final class GameBoard {
     }
 
     /**
+     * Elimină o carte specificată de pe tablă.
      *
-     * @param cardToRemove
+     * @param cardToRemove cartea care trebuie eliminată
      */
     public void removeCard(final Card cardToRemove) {
         for (ArrayList<Card> row : board) {
@@ -152,25 +158,28 @@ public final class GameBoard {
     }
 
     /**
+     * Returnează numărul de rânduri de pe tablă.
      *
-     * @return
+     * @return numărul total de rânduri
      */
     public int getRows() {
         return board.size();
     }
 
     /**
+     * Returnează numărul de coloane ocupate pe un rând specificat.
      *
-     * @param row
-     * @return
+     * @param row rândul dorit
+     * @return numărul de cărți de pe rândul respectiv sau 0 dacă rândul este invalid
      */
     public int getCols(final int row) {
         return row >= 0 && row < board.size() ? board.get(row).size() : 0;
     }
 
     /**
+     * Creează o reprezentare JSON a cărților de pe tablă.
      *
-     * @return
+     * @return un nod JSON care conține cărțile de pe fiecare rând al tablei
      */
     public ArrayNode getCardsOnTable() {
         ArrayNode cardsOnTable = OBJECT_MAPPER.createArrayNode();
@@ -190,7 +199,8 @@ public final class GameBoard {
     }
 
     /**
-     *
+     * Resetează starea de atac pentru toate cărțile de pe tablă.
+     * Setează `hasAttacked` la `false` pentru fiecare carte.
      */
     public void resetAttack() {
         for (int row = 0; row < board.size(); row++) {
@@ -202,17 +212,19 @@ public final class GameBoard {
     }
 
     /**
+     * Resetează starea de atac a eroului unui jucător.
      *
-     * @param player
+     * @param player jucătorul al cărui erou trebuie resetat
      */
     public void resetHeroAttack(final Player player) {
         player.getHero().setHasAttacked(false);
     }
 
     /**
+     * Aplică abilitatea unei cărți asupra unei alte cărți, în funcție de tipul acesteia.
      *
-     * @param attacker
-     * @param cardAttacked
+     * @param attacker     cartea care folosește abilitatea
+     * @param cardAttacked cartea asupra căreia se aplică abilitatea
      */
     public void cardUsesAbility(final Card attacker, final Card cardAttacked) {
         if (attacker.getName().equals("The Ripper")) {
@@ -258,9 +270,10 @@ public final class GameBoard {
     }
 
     /**
+     * Verifică dacă există un "tank" pe rândurile inamicului.
      *
-     * @param playerIndex
-     * @return
+     * @param playerIndex indicele jucătorului curent
+     * @return true dacă există un "tank", altfel false
      */
     public boolean hasTankOnEnemyRows(final int playerIndex) {
         int startRow;
@@ -285,9 +298,10 @@ public final class GameBoard {
     }
 
     /**
+     * Returnează primul "tank" de pe rândurile inamicului, dacă există.
      *
-     * @param playerIndex
-     * @return
+     * @param playerIndex indicele jucătorului curent
+     * @return cartea de tip "tank" sau null dacă nu există
      */
     public Card getTankOnEnemyRows(final int playerIndex) {
         int startRow;
@@ -312,9 +326,10 @@ public final class GameBoard {
     }
 
     /**
+     * Returnează toate cărțile de tip "tank" de pe rândurile inamicului.
      *
-     * @param playerIndex
-     * @return
+     * @param playerIndex indicele jucătorului curent
+     * @return lista cărților de tip "tank"
      */
     public ArrayList<Card> getAllTanksOnEnemyRows(final int playerIndex) {
         int startRow;
@@ -341,9 +356,10 @@ public final class GameBoard {
     }
 
     /**
+     * Realizează un atac asupra eroului unui jucător.
      *
-     * @param attackedPlayer
-     * @param attackerCard
+     * @param attackedPlayer jucătorul al cărui erou este atacat
+     * @param attackerCard   cartea care efectuează atacul
      */
     public void attackHero(final Player attackedPlayer,
                            final Card attackerCard) {
@@ -352,18 +368,20 @@ public final class GameBoard {
     }
 
     /**
+     * Verifică dacă eroul unui jucător a murit.
      *
-     * @param player
-     * @return
+     * @param player jucătorul al cărui erou este verificat
+     * @return true dacă eroul este mort, altfel false
      */
     public boolean isHeroDead(final Player player) {
         return player.getHero().getHealth() <= 0;
     }
 
     /**
+     * Aplică abilitatea unui erou asupra unui rând specificat de pe tablă.
      *
-     * @param attacker
-     * @param attackedRow
+     * @param attacker   jucătorul care folosește abilitatea
+     * @param attackedRow rândul asupra căruia se aplică abilitatea
      */
     public void useHeroAbility(final Player attacker, final int attackedRow) {
         attacker.setMana(attacker.getMana() - attacker.getHero().getMana());
@@ -404,9 +422,10 @@ public final class GameBoard {
     }
 
     /**
+     * Returnează toate cărțile de pe un rând specificat al tablei.
      *
-     * @param row
-     * @return
+     * @param row rândul dorit
+     * @return lista cărților de pe rândul specificat sau o listă goală dacă rândul este invalid
      */
     public ArrayList<Card> getRow(final int row) {
         if (row >= 0 && row < BOARD_ROWS) {

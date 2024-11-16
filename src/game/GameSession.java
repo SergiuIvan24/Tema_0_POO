@@ -13,21 +13,22 @@ public class GameSession {
     private int roundNumber;
     private ArrayList<CardInput> playerOneDeck;
     private ArrayList<CardInput> playerTwoDeck;
-    private GameBoard gameBoard;
+    private final GameBoard gameBoard;
     private Player playerOne;
     private Player playerTwo;
     private Player currentPlayer;
     private int turnCompleted;
-    private int startingPlayer;
     private boolean gameEnded = false;
-    private ArrayList<CardInput> originalPlayerOneDeck;
-    private ArrayList<CardInput> originalPlayerTwoDeck;
+    private final ArrayList<CardInput> originalPlayerOneDeck;
+    private final ArrayList<CardInput> originalPlayerTwoDeck;
 
     /**
+     * Constructorul clasei GameSession.
+     * Inițializează sesiunea de joc cu pachetele de cărți ale jucătorilor și datele de start.
      *
-     * @param playerOneDeck
-     * @param playerTwoDeck
-     * @param startGame
+     * @param playerOneDeck pachetul de cărți al jucătorului 1
+     * @param playerTwoDeck pachetul de cărți al jucătorului 2
+     * @param startGame     datele pentru inițializarea jocului
      */
     public GameSession(final ArrayList<CardInput> playerOneDeck,
                        final ArrayList<CardInput> playerTwoDeck, final StartGameInput startGame) {
@@ -42,7 +43,7 @@ public class GameSession {
     }
 
     /**
-     *
+     * Resetează sesiunea de joc la starea inițială.
      */
     public void reset() {
         playerOne.setMana(0);
@@ -58,8 +59,9 @@ public class GameSession {
     }
 
     /**
+     * Inițializează sesiunea de joc cu parametrii specificați.
      *
-     * @param startGame
+     * @param startGame datele pentru inițializarea jocului
      */
     public void initializeGame(final StartGameInput startGame) {
         Random random = new Random(startGame.getShuffleSeed());
@@ -74,7 +76,7 @@ public class GameSession {
                 playerTwoHero, playerTwoDeck, 0);
         this.playerOne.getHero().setHealth(INITIAL_HEALTH);
         this.playerTwo.getHero().setHealth(INITIAL_HEALTH);
-        this.startingPlayer = startGame.getStartingPlayer();
+        int startingPlayer = startGame.getStartingPlayer();
 
         if (startingPlayer == 1) {
             this.currentPlayer = playerOne;
@@ -85,7 +87,8 @@ public class GameSession {
     }
 
     /**
-     *
+     * Începe o nouă rundă de joc.
+     * Actualizează mana și extrage câte o carte pentru fiecare jucător.
      */
     public void startRound() {
         if (!this.gameEnded) {
@@ -99,7 +102,8 @@ public class GameSession {
     }
 
     /**
-     *
+     * Marchează sfârșitul turei curente a jucătorului.
+     * Schimbă jucătorul curent și începe o rundă nouă dacă este necesar.
      */
     public void endTurn() {
         if (!this.gameEnded) {
@@ -123,7 +127,7 @@ public class GameSession {
     }
 
     /**
-     *
+     * Resetează starea de îngheț a cărților jucătorului curent.
      */
     public void resetFrozenCards() {
         if (this.getCurrentPlayerIndex() == 1) {
@@ -148,8 +152,9 @@ public class GameSession {
     }
 
     /**
+     * Actualizează mana unui jucător, crescând-o cu numărul rundei curente.
      *
-     * @param player
+     * @param player jucătorul căruia i se actualizează mana
      */
     private void updateMana(final Player player) {
         int newMana = player.getMana() + roundNumber;
@@ -159,8 +164,9 @@ public class GameSession {
     }
 
     /**
+     * Permite unui jucător să extragă o carte din propriul pachet.
      *
-     * @param player
+     * @param player jucătorul care extrage cartea
      */
     private void drawCard(final Player player) {
         if (!player.getDeck().isEmpty()) {
@@ -170,7 +176,7 @@ public class GameSession {
     }
 
     /**
-     *
+     * Resetează pachetele de cărți ale jucătorilor la starea inițială.
      */
     public void resetDecks() {
         playerOneDeck = new ArrayList<>(originalPlayerOneDeck);
@@ -178,71 +184,79 @@ public class GameSession {
     }
 
     /**
+     * Returnează numărul rundei curente.
      *
-     * @return
+     * @return numărul rundei curente
      */
     public int getRoundNumber() {
         return roundNumber;
     }
 
     /**
-     *
+     * Incrementează numărul rundei curente.
      */
     public void incrementRoundNumber() {
         this.roundNumber++;
     }
 
     /**
+     * Returnează tabla de joc utilizată în sesiunea curentă.
      *
-     * @return
+     * @return tabla de joc
      */
     public GameBoard getGameBoard() {
         return gameBoard;
     }
 
     /**
+     * Returnează jucătorul 1.
      *
-     * @return
+     * @return jucătorul 1
      */
     public Player getPlayerOne() {
         return playerOne;
     }
 
     /**
+     * Returnează jucătorul 2.
      *
-     * @return
+     * @return jucătorul 2
      */
     public Player getPlayerTwo() {
         return playerTwo;
     }
 
     /**
+     * Returnează jucătorul curent.
      *
-     * @return
+     * @return jucătorul curent
      */
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
     /**
+     * Returnează indexul jucătorului curent (1 sau 2).
      *
-     * @return
+     * @return indexul jucătorului curent
      */
     public int getCurrentPlayerIndex() {
         return currentPlayer == playerOne ? 1 : 2;
     }
 
     /**
+     * Verifică dacă jocul s-a încheiat.
      *
-     * @return
+     * @return true dacă jocul s-a încheiat, altfel false
      */
     public boolean isGameEnded() {
         return this.gameEnded;
     }
 
     /**
+     * Setează starea jocului ca fiind încheiată sau nu.
      *
-     * @param val
+     * @param val true dacă jocul este încheiat, altfel false
      */
     public void setGameEnded(final boolean val) {
         this.gameEnded = val;

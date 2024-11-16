@@ -1,7 +1,8 @@
 Starting audit...
-[ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/game/GameSession.java:51:39: '30' is a magic number. [MagicNumber]
-[ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/game/GameSession.java:52:39: '30' is a magic number. [MagicNumber]
-[ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/game/GameSession.java:140:38: '3' is a magic number. [MagicNumber]
+[ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/game/GameSession.java:49:39: '30' is a magic number. [MagicNumber]
+[ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/game/GameSession.java:50:39: '30' is a magic number. [MagicNumber]
+[ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/game/GameSession.java:138:38: '3' is a magic number. [MagicNumber]
+[ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/game/GameBoard.java:71: Line is longer than 100 characters (found 104). [LineLength]
 [ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/game/GameMode.java:18:39: Name 'ObjectMapper' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'. [ConstantName]
 [ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/game/GameMode.java:91:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/game/GameMode.java:113:5: Method length is 487 lines (max allowed is 150). [MethodLength]
@@ -17,7 +18,7 @@ Starting audit...
 [ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/game/GameMode.java:642:33: '4' is a magic number. [MagicNumber]
 [ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/checker/CheckerConstants.java:1: File does not end with a newline. [NewlineAtEndOfFile]
 [ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/checker/Checker.java:1: File does not end with a newline. [NewlineAtEndOfFile]
-[ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/main/Main.java:95: Line is longer than 100 characters (found 127). [LineLength]
-[ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/main/Main.java:96: Line is longer than 100 characters (found 127). [LineLength]
+[ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/main/Main.java:77: Line is longer than 100 characters (found 127). [LineLength]
+[ERROR] /home/sergiu/FOLDER_TEMA_POO/tema/./src/main/Main.java:78: Line is longer than 100 characters (found 127). [LineLength]
 Audit done.
-Checkstyle ends with 20 errors.
+Checkstyle ends with 21 errors.

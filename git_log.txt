@@ -1,0 +1,23 @@
+commit 4b33d80c1fa2c1cf6d41a554e6d0de74c6ee7c27
+Author: Sergiu Ivan <sergiu.ivan@stud.acs.upb.ro>
+Date:   Fri Nov 8 21:11:44 2024 +0200
+
+    big_game + checkstyle
+
+commit 951f2943c4767fa8df95484903ba7f2bbe49133b
+Author: Sergiu Ivan <sergiu.ivan@stud.acs.upb.ro>
+Date:   Sat Nov 2 00:03:55 2024 +0200
+
+    Implementarea jocului pana la utilizarea abilitatii eroului, incluzand  cazurile invalide
+
+commit 8b72fa97641f8ac9bec23ba8ad30ca188dd0cc91
+Author: Sergiu Ivan <sergiu.ivan@stud.acs.upb.ro>
+Date:   Fri Nov 1 21:06:20 2024 +0200
+
+    Implementarea jocului pana la utilizarea abilitatii eroului, exceptand cazurile invalide
+
+commit 619d12dcd047c32b6cff98aea66d9287a52c0a7c
+Author: Sergiu Ivan <sergiu.ivan@stud.acs.upb.ro>
+Date:   Fri Nov 1 10:06:25 2024 +0200
+
+    Implementarea jocului pana la atacul asupra eroului
